@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocketServer</title>
+</head>
+<body>
+    <h1>Acceso denegado</h1>
+
+    <script src="socket.io/socket.io.js"></script>
+
+    <!-- Para conectar a nuestro socket server como cliente -->
+    <script>
+        // on es para escuchar y  emit es para emitir informacion
+        var socket = io();
+        socket.on('connect',function () {
+            console.log('Conectado al servidor')
+        })
+
+        socket.on('disconnect',function () {
+            console.log('Perdimos comunicacion con el servidor')
+        })
+
+
+        // socket.emit('mensaje','Brando Palacios');
+        socket.emit('mensaje',{nombre:'Brando'});
+
+        // Para escuchar la notificacion recibida de clientes q escucharon el otro evento del index.js 
+        socket.on('mensaje',function(payload){
+            console.log('Escuchando: ',payload)
+        });
+        //payload es lo que el servidor quiere q envie
+    </script>
+
+</body>
+</html>
